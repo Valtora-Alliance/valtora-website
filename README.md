@@ -13,3 +13,5 @@ Opnieuw bouwen na een wijziging in het ontwerp:
     python3 ontwerp/build.py ontwerp/Main.dc.html .
 
 Het contactformulier gebruikt Netlify Forms: inzendingen verschijnen in Netlify onder Forms → contact.
+
+Live op https://valtora-alliance.com
