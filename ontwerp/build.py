@@ -129,14 +129,14 @@ html = f"""<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Valtora Alliance – Begeleiding in Paraguay</title>
 <meta name="description" content="Valtora Alliance begeleidt Belgische, Nederlandse en Duitse ondernemers bij verkenning, vestiging en investeringen in Paraguay.">
-<link rel="canonical" href="https://www.valtora-alliance.com/">
+<link rel="canonical" href="https://valtora-alliance.com/">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Valtora Alliance – Begeleiding in Paraguay">
 <meta property="og:description" content="Uw volgende stap ligt buiten Europa. Verkenning, residentie, bank en investeringen in Paraguay, met één aanspreekpunt.">
-<meta property="og:image" content="https://www.valtora-alliance.com/img/og.jpg">
-<meta property="og:url" content="https://www.valtora-alliance.com/">
+<meta property="og:image" content="https://valtora-alliance.com/img/og.jpg">
+<meta property="og:url" content="https://valtora-alliance.com/">
 {helmet.strip()}
 </head>
 <body>
