@@ -26,7 +26,7 @@ a{color:#0B2545}a:hover{color:#123A67}
 <body>
 <div id="app"><noscript><p style="padding:24px;font-family:sans-serif">Deze website heeft JavaScript nodig. Contact: <a href="mailto:info@valtora-alliance.com">info@valtora-alliance.com</a></p></noscript></div>
 <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
-<input name="naam"><input name="email"><input name="land"><textarea name="vraag"></textarea><input name="bot-field">
+<input name="naam"><input name="email"><input name="taal"><input name="land"><textarea name="vraag"></textarea><input name="bot-field">
 </form>
 <script type="text/x-template" id="dc-template">
 <div lang="{{ lang }}" style="font-family: 'Source Sans 3', 'Segoe UI', sans-serif; color: #0B2545; background: #F7F6F2; font-size: 17px; line-height: 1.6">
@@ -478,8 +478,8 @@ a{color:#0B2545}a:hover{color:#123A67}
 <p style="margin: 0 0 6px; color: #D3DDE8"><span style="font-weight: 600; color: #FFFFFF">Marion Sterckx</span> · <a href="tel:+32474582685" style="color: #E4C25C">{{ t.phoneMarion }}</a></p>
 <p style="margin: 0; color: #D3DDE8">{{ t.emailLine }} <a href="mailto:info@valtora-alliance.com" style="color: #FFFFFF; font-weight: 600">info@valtora-alliance.com</a></p>
 </div>
-<form name="contact" method="POST" action="/bedankt.html" data-netlify="true" netlify-honeypot="bot-field" aria-label="{{ t.formLabel }}" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; color: #0B2545; border-radius: 6px; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
-<input type="hidden" name="form-name" value="contact"><p hidden><label>Laat leeg: <input name="bot-field"></label></p>
+<form name="contact" method="POST" action="{{ t.formAction }}" data-netlify="true" netlify-honeypot="bot-field" aria-label="{{ t.formLabel }}" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; color: #0B2545; border-radius: 6px; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<input type="hidden" name="form-name" value="contact"><input type="hidden" name="taal" value="{{ lang }}"><p hidden><label>Laat leeg: <input name="bot-field"></label></p>
 <label for="naam" style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ t.fName }}<input id="naam" name="naam" type="text" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B8C4D2; border-radius: 4px"></label>
 <label for="email" style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ t.fEmail }}<input id="email" name="email" type="email" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B8C4D2; border-radius: 4px"></label>
 <label for="land" style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ t.fCountry }}<select id="land" name="land" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B8C4D2; border-radius: 4px; background: #FFFFFF"><sc-for list="{{ t.countries }}" as="o" hint-placeholder-count="4"><option>{{ o }}</option></sc-for></select></label>
@@ -562,6 +562,16 @@ a{color:#0B2545}a:hover{color:#123A67}
   root.addEventListener('click', function (e) {
     var el = e.target.closest('[data-dc-click]');
     if (el) { fns[+el.getAttribute('data-dc-click')](e); }
+  });
+  root.addEventListener('submit', function (e) {
+    var f = e.target;
+    if (f.getAttribute('name') !== 'contact') return;
+    e.preventDefault();
+    var btn = f.querySelector('button[type=submit]'); if (btn) btn.disabled = true;
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(f)).toString() })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); location.href = f.getAttribute('action'); })
+      .catch(function () { if (btn) btn.disabled = false; alert(document.documentElement.lang === 'de' ? 'Senden fehlgeschlagen. Bitte mailen Sie an info@valtora-alliance.com.' : document.documentElement.lang === 'en' ? 'Sending failed. Please email info@valtora-alliance.com.' : 'Verzenden mislukt. Mail ons gerust op info@valtora-alliance.com.'); });
   });
   window.__dcStart = function (Component) {
     comp = new Component({});
@@ -715,7 +725,7 @@ class Component extends DCLogic {
         notItems: ['Geen beleggingsadvies: daarvoor werken we met erkende financiële partners.', 'Geen vastgoedmakelaardij: aankopen lopen via erkende lokale makelaars en notarissen.', 'Geen beheer van uw geld: betalingen gaan rechtstreeks naar de begunstigde.', 'U beslist altijd zelf.'],
         ctTitle: 'Zullen we kennismaken?', ctText: 'Een eerste gesprek van een half uur is gratis en vrijblijvend. Daarna weet u of Paraguay bij u past.',
         phoneAndy: '0499 11 75 98', phoneMarion: '0474 58 26 85', emailLine: 'E-mail:',
-        formLabel: 'Contactformulier', fName: 'Naam', fEmail: 'E-mail', fCountry: 'Land', fQuestion: 'Waar kunnen we u mee helpen?', fSend: 'Verstuur',
+        formLabel: 'Contactformulier', fName: 'Naam', fEmail: 'E-mail', fCountry: 'Land', fQuestion: 'Waar kunnen we u mee helpen?', fSend: 'Verstuur', formAction: '/bedankt.html',
         countries: ['Nederland', 'België', 'Duitsland', 'Ander land'],
         legal: 'Overeenkomsten worden gesloten met a&a-mmvp BV, Trekschurenstraat 92, 3500 Hasselt, ondernemingsnummer 0840.525.883. Valtora Alliance geeft geen beleggingsadvies en treedt niet op als vastgoedmakelaar. Investeren in het buitenland houdt risico’s in.',
         privacy: 'Privacy', terms: 'Algemene voorwaarden'
@@ -854,7 +864,7 @@ class Component extends DCLogic {
         notItems: ['No investment advice: for that we work with licensed financial partners.', 'No real estate brokerage: purchases go through licensed local agents and notaries.', 'No management of your money: payments go directly to the beneficiary.', 'You always decide for yourself.'],
         ctTitle: 'Shall we get acquainted?', ctText: 'A first conversation of half an hour is free and without obligation. Afterwards you will know whether Paraguay suits you.',
         phoneAndy: '+32 499 11 75 98', phoneMarion: '+32 474 58 26 85', emailLine: 'Email:',
-        formLabel: 'Contact form', fName: 'Name', fEmail: 'Email', fCountry: 'Country', fQuestion: 'How can we help you?', fSend: 'Send',
+        formLabel: 'Contact form', fName: 'Name', fEmail: 'Email', fCountry: 'Country', fQuestion: 'How can we help you?', fSend: 'Send', formAction: '/thank-you.html',
         countries: ['Netherlands', 'Belgium', 'Germany', 'Other country'],
         legal: 'Agreements are concluded with a&a-mmvp BV, Trekschurenstraat 92, 3500 Hasselt, Belgium, company number 0840.525.883. Valtora Alliance does not provide investment advice and does not act as a real estate agent. Investing abroad involves risks.',
         privacy: 'Privacy', terms: 'Terms and conditions'
@@ -993,7 +1003,7 @@ class Component extends DCLogic {
         notItems: ['Keine Anlageberatung: dafür arbeiten wir mit zugelassenen Finanzpartnern.', 'Keine Immobilienvermittlung: Käufe laufen über zugelassene lokale Makler und Notare.', 'Keine Verwaltung Ihres Geldes: Zahlungen gehen direkt an den Empfänger.', 'Sie entscheiden immer selbst.'],
         ctTitle: 'Sollen wir uns kennenlernen?', ctText: 'Ein erstes Gespräch von einer halben Stunde ist kostenlos und unverbindlich. Danach wissen Sie, ob Paraguay zu Ihnen passt.',
         phoneAndy: '+32 499 11 75 98', phoneMarion: '+32 474 58 26 85', emailLine: 'E-Mail:',
-        formLabel: 'Kontaktformular', fName: 'Name', fEmail: 'E-Mail', fCountry: 'Land', fQuestion: 'Wie können wir Ihnen helfen?', fSend: 'Senden',
+        formLabel: 'Kontaktformular', fName: 'Name', fEmail: 'E-Mail', fCountry: 'Land', fQuestion: 'Wie können wir Ihnen helfen?', fSend: 'Senden', formAction: '/danke.html',
         countries: ['Deutschland', 'Niederlande', 'Belgien', 'Anderes Land'],
         legal: 'Verträge werden mit der a&a-mmvp BV, Trekschurenstraat 92, 3500 Hasselt, Belgien, Unternehmensnummer 0840.525.883, geschlossen. Valtora Alliance erbringt keine Anlageberatung und tritt nicht als Immobilienmakler auf. Investitionen im Ausland sind mit Risiken verbunden.',
         privacy: 'Datenschutz', terms: 'AGB'

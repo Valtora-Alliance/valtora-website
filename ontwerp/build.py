@@ -25,17 +25,20 @@ body = src[src.index("<x-dc>") + len("<x-dc>"): src.index("</x-dc>")]
 helmet = re.search(r"<helmet>([\s\S]*?)</helmet>", body).group(1)
 tpl = re.sub(r"<helmet>[\s\S]*?</helmet>", "", body).strip()
 logic = re.search(r'<script type="text/x-dc"[^>]*>([\s\S]*?)</script>', src).group(1)
+for _a, _b in (("fSend: 'Verstuur',", "fSend: 'Verstuur', formAction: '/bedankt.html',"), ("fSend: 'Send',", "fSend: 'Send', formAction: '/thank-you.html',"), ("fSend: 'Senden',", "fSend: 'Senden', formAction: '/danke.html',")):
+    assert logic.count(_a) == 1, _a
+    logic = logic.replace(_a, _b)
 
 # Contactformulier laten werken via Netlify Forms
 form_open = re.search(r"<form aria-label=\"\{\{ t\.formLabel \}\}\" style=\"", tpl)
 assert form_open
 tpl = tpl.replace(
     '<form aria-label="{{ t.formLabel }}" style="',
-    '<form name="contact" method="POST" action="/bedankt.html" data-netlify="true" netlify-honeypot="bot-field" '
+    '<form name="contact" method="POST" action="{{ t.formAction }}" data-netlify="true" netlify-honeypot="bot-field" '
     'aria-label="{{ t.formLabel }}" style="', 1)
 tpl = tpl.replace(
     'gap: 16px">\n<label for="naam"',
-    'gap: 16px">\n<input type="hidden" name="form-name" value="contact">'
+    'gap: 16px">\n<input type="hidden" name="form-name" value="contact"><input type="hidden" name="taal" value="{{ lang }}">'
     '<p hidden><label>Laat leeg: <input name="bot-field"></label></p>\n<label for="naam"', 1)
 for field in ('id="naam" name="naam" type="text"', 'id="email" name="email" type="email"'):
     assert field in tpl, field
@@ -111,6 +114,16 @@ RUNTIME = r"""
     var el = e.target.closest('[data-dc-click]');
     if (el) { fns[+el.getAttribute('data-dc-click')](e); }
   });
+  root.addEventListener('submit', function (e) {
+    var f = e.target;
+    if (f.getAttribute('name') !== 'contact') return;
+    e.preventDefault();
+    var btn = f.querySelector('button[type=submit]'); if (btn) btn.disabled = true;
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(f)).toString() })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); location.href = f.getAttribute('action'); })
+      .catch(function () { if (btn) btn.disabled = false; alert(document.documentElement.lang === 'de' ? 'Senden fehlgeschlagen. Bitte mailen Sie an info@valtora-alliance.com.' : document.documentElement.lang === 'en' ? 'Sending failed. Please email info@valtora-alliance.com.' : 'Verzenden mislukt. Mail ons gerust op info@valtora-alliance.com.'); });
+  });
   window.__dcStart = function (Component) {
     comp = new Component({});
     var lang = null;
@@ -142,7 +155,7 @@ html = f"""<!doctype html>
 <body>
 <div id="app"><noscript><p style="padding:24px;font-family:sans-serif">Deze website heeft JavaScript nodig. Contact: <a href="mailto:info@valtora-alliance.com">info@valtora-alliance.com</a></p></noscript></div>
 <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
-<input name="naam"><input name="email"><input name="land"><textarea name="vraag"></textarea><input name="bot-field">
+<input name="naam"><input name="email"><input name="taal"><input name="land"><textarea name="vraag"></textarea><input name="bot-field">
 </form>
 <script type="text/x-template" id="dc-template">
 {tpl}
