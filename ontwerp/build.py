@@ -169,14 +169,14 @@ META = {
     "en": {
         "path": "/en/", "locale": "en_GB",
         "title": "Valtora Alliance – Doing business and investing in Paraguay",
-        "desc": "Valtora Alliance guides entrepreneurs from Belgium, the Netherlands and Germany through residency, banking, company formation and investment in Paraguay.",
+        "desc": "Valtora Alliance guides entrepreneurs from Belgium and the Netherlands through residency, banking, company formation and investment in Paraguay.",
         "ogdesc": "Your next step lies beyond Europe. Exploration, residency, banking and investment in Paraguay, with one point of contact.",
         "noscript": "This website works best with JavaScript. Contact:",
     },
     "de": {
         "path": "/de/", "locale": "de_DE",
         "title": "Valtora Alliance – Unternehmen und Investieren in Paraguay",
-        "desc": "Valtora Alliance begleitet Unternehmer aus Deutschland, den Niederlanden und Belgien bei Aufenthalt, Bankkonto, Firmengründung und Investitionen in Paraguay.",
+        "desc": "Valtora Alliance begleitet Unternehmer aus den Niederlanden und Belgien bei Aufenthalt, Bankkonto, Firmengründung und Investitionen in Paraguay.",
         "ogdesc": "Ihr nächster Schritt liegt außerhalb Europas. Erkundung, Aufenthalt, Bank und Investitionen in Paraguay, mit einem Ansprechpartner.",
         "noscript": "Diese Website funktioniert am besten mit JavaScript. Kontakt:",
     },
@@ -196,7 +196,7 @@ ORG = {
     "taxID": "BE0840525883",
     "address": {"@type": "PostalAddress", "streetAddress": "Trekschurenstraat 92", "postalCode": "3500",
                 "addressLocality": "Hasselt", "addressCountry": "BE"},
-    "areaServed": [{"@type": "Country", "name": n} for n in ("Belgium", "Netherlands", "Germany", "Paraguay")],
+    "areaServed": [{"@type": "Country", "name": n} for n in ("Belgium", "Netherlands", "Paraguay")],
     "knowsLanguage": ["nl", "en", "de", "es"],
     "founder": [
         {"@type": "Person", "name": "Andy Schuurmans", "telephone": "+32 499 11 75 98"},
