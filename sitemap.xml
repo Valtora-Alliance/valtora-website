@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://valtora-alliance.com/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://valtora-alliance.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://valtora-alliance.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://valtora-alliance.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://valtora-alliance.com/"/>
+  </url>
+  <url>
+    <loc>https://valtora-alliance.com/en/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://valtora-alliance.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://valtora-alliance.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://valtora-alliance.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://valtora-alliance.com/"/>
+  </url>
+  <url>
+    <loc>https://valtora-alliance.com/de/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://valtora-alliance.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://valtora-alliance.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://valtora-alliance.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://valtora-alliance.com/"/>
+  </url>
+  <url>
+    <loc>https://valtora-alliance.com/privacy/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://valtora-alliance.com/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://valtora-alliance.com/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://valtora-alliance.com/de/datenschutz/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://valtora-alliance.com/privacy/"/>
+  </url>
+  <url>
+    <loc>https://valtora-alliance.com/en/privacy/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://valtora-alliance.com/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://valtora-alliance.com/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://valtora-alliance.com/de/datenschutz/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://valtora-alliance.com/privacy/"/>
+  </url>
+  <url>
+    <loc>https://valtora-alliance.com/de/datenschutz/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://valtora-alliance.com/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://valtora-alliance.com/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://valtora-alliance.com/de/datenschutz/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://valtora-alliance.com/privacy/"/>
+  </url>
+</urlset>

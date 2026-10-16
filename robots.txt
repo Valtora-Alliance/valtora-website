@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://valtora-alliance.com/sitemap.xml
