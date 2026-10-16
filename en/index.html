@@ -348,8 +348,8 @@ a{color:#0B2545}a:hover{color:#123A67}
 <p style="margin: 0 0 6px; color: #D3DDE8"><span style="font-weight: 600; color: #FFFFFF">Marion Sterckx</span> · <a href="tel:+32474582685" style="color: #E4C25C">+32 474 58 26 85</a></p>
 <p style="margin: 0; color: #D3DDE8">Email: <a href="mailto:info@valtora-alliance.com" style="color: #FFFFFF; font-weight: 600">info@valtora-alliance.com</a></p>
 </div>
-<form name="contact" method="POST" action="/thank-you.html" aria-label="Contact form" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; color: #0B2545; border-radius: 6px; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
-<input type="hidden" name="form-name" value="contact"><input type="hidden" name="taal" value="en"><p hidden><label>Laat leeg: <input name="bot-field"></label></p>
+<form name="contact-en" method="POST" action="/thank-you.html" aria-label="Contact form" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; color: #0B2545; border-radius: 6px; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<input type="hidden" name="form-name" value="contact-en"><input type="hidden" name="taal" value="en"><p hidden><label>Laat leeg: <input name="bot-field"></label></p>
 <label for="naam" style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">Name<input id="naam" name="naam" type="text" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B8C4D2; border-radius: 4px"></label>
 <label for="email" style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">Email<input id="email" name="email" type="email" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B8C4D2; border-radius: 4px"></label>
 <label for="land" style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">Country<select id="land" name="land" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B8C4D2; border-radius: 4px; background: #FFFFFF"><option>Netherlands</option><option>Belgium</option><option>Germany</option><option>Other country</option></select></label>
@@ -369,6 +369,14 @@ a{color:#0B2545}a:hover{color:#123A67}
 
 </div></div>
 <noscript><p style="padding:24px;font-family:sans-serif">This website works best with JavaScript. Contact: <a href="mailto:info@valtora-alliance.com">info@valtora-alliance.com</a></p></noscript>
+<form name="contact-en" data-netlify="true" netlify-honeypot="bot-field" hidden>
+<label>Name <input name="naam"></label>
+<label>Email <input name="email"></label>
+<label>Country <input name="land"></label>
+<label>How can we help you? <textarea name="vraag"></textarea></label>
+<label>Website language <input name="taal"></label>
+<label>Leave empty <input name="bot-field"></label>
+</form>
 <script type="text/x-template" id="dc-template">
 <div lang="{{ lang }}" style="font-family: 'Source Sans 3', 'Segoe UI', sans-serif; color: #0B2545; background: #F7F6F2; font-size: 17px; line-height: 1.6">
 
@@ -819,8 +827,8 @@ a{color:#0B2545}a:hover{color:#123A67}
 <p style="margin: 0 0 6px; color: #D3DDE8"><span style="font-weight: 600; color: #FFFFFF">Marion Sterckx</span> · <a href="tel:+32474582685" style="color: #E4C25C">{{ t.phoneMarion }}</a></p>
 <p style="margin: 0; color: #D3DDE8">{{ t.emailLine }} <a href="mailto:info@valtora-alliance.com" style="color: #FFFFFF; font-weight: 600">info@valtora-alliance.com</a></p>
 </div>
-<form name="contact" method="POST" action="{{ t.formAction }}" aria-label="{{ t.formLabel }}" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; color: #0B2545; border-radius: 6px; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
-<input type="hidden" name="form-name" value="contact"><input type="hidden" name="taal" value="{{ lang }}"><p hidden><label>Laat leeg: <input name="bot-field"></label></p>
+<form name="contact-{{ lang }}" method="POST" action="{{ t.formAction }}" aria-label="{{ t.formLabel }}" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; color: #0B2545; border-radius: 6px; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<input type="hidden" name="form-name" value="contact-{{ lang }}"><input type="hidden" name="taal" value="{{ lang }}"><p hidden><label>Laat leeg: <input name="bot-field"></label></p>
 <label for="naam" style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ t.fName }}<input id="naam" name="naam" type="text" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B8C4D2; border-radius: 4px"></label>
 <label for="email" style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ t.fEmail }}<input id="email" name="email" type="email" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B8C4D2; border-radius: 4px"></label>
 <label for="land" style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ t.fCountry }}<select id="land" name="land" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B8C4D2; border-radius: 4px; background: #FFFFFF"><sc-for list="{{ t.countries }}" as="o" hint-placeholder-count="4"><option>{{ o }}</option></sc-for></select></label>
@@ -910,7 +918,7 @@ a{color:#0B2545}a:hover{color:#123A67}
   });
   root.addEventListener('submit', function (e) {
     var f = e.target;
-    if (f.getAttribute('name') !== 'contact') return;
+    if (!/^contact-/.test(f.getAttribute('name') || '')) return;
     e.preventDefault();
     var btn = f.querySelector('button[type=submit]'); if (btn) btn.disabled = true;
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

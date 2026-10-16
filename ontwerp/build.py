@@ -55,12 +55,12 @@ logic = logic.replace(_pick, "pick: () => window.__dcLang(code)")
 assert '<form aria-label="{{ t.formLabel }}" style="' in tpl
 tpl = tpl.replace(
     '<form aria-label="{{ t.formLabel }}" style="',
-    '<form name="contact" method="POST" action="{{ t.formAction }}" '
+    '<form name="contact-{{ lang }}" method="POST" action="{{ t.formAction }}" '
     'aria-label="{{ t.formLabel }}" style="', 1)
 assert 'gap: 16px">\n<label for="naam"' in tpl
 tpl = tpl.replace(
     'gap: 16px">\n<label for="naam"',
-    'gap: 16px">\n<input type="hidden" name="form-name" value="contact"><input type="hidden" name="taal" value="{{ lang }}">'
+    'gap: 16px">\n<input type="hidden" name="form-name" value="contact-{{ lang }}"><input type="hidden" name="taal" value="{{ lang }}">'
     '<p hidden><label>Laat leeg: <input name="bot-field"></label></p>\n<label for="naam"', 1)
 for field in ('id="naam" name="naam" type="text"', 'id="email" name="email" type="email"'):
     assert field in tpl, field
@@ -141,7 +141,7 @@ RUNTIME = r"""
   });
   root.addEventListener('submit', function (e) {
     var f = e.target;
-    if (f.getAttribute('name') !== 'contact') return;
+    if (!/^contact-/.test(f.getAttribute('name') || '')) return;
     e.preventDefault();
     var btn = f.querySelector('button[type=submit]'); if (btn) btn.disabled = true;
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -229,15 +229,22 @@ hreflang = "\n".join(
 
 # Eén verborgen formulier (alleen op de NL-pagina) registreert het formulier bij Netlify,
 # met vaste Nederlandse veldnamen voor de meldingsmail, in welke taal de bezoeker ook invult.
-DETECT = """<form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
-<label>Naam <input name="naam"></label>
-<label>E-mail <input name="email"></label>
-<label>Land <input name="land"></label>
-<label>Vraag <textarea name="vraag"></textarea></label>
-<label>Taal van de website <input name="taal"></label>
-<label>Laat leeg <input name="bot-field"></label>
-</form>
-"""
+LABELS = {
+    "nl": ("Naam", "E-mail", "Land", "Waar kunnen we u mee helpen?", "Taal van de website", "Laat leeg"),
+    "en": ("Name", "Email", "Country", "How can we help you?", "Website language", "Leave empty"),
+    "de": ("Name", "E-Mail", "Land", "Wie können wir Ihnen helfen?", "Sprache der Website", "Leer lassen"),
+}
+
+
+def detect(lang):
+    """Verborgen formulier waarmee Netlify het formulier van deze taal registreert,
+    met veldnamen in die taal voor de meldingsmail."""
+    l = LABELS[lang]
+    return (f'<form name="contact-{lang}" data-netlify="true" netlify-honeypot="bot-field" hidden>\n'
+            f'<label>{l[0]} <input name="naam"></label>\n<label>{l[1]} <input name="email"></label>\n'
+            f'<label>{l[2]} <input name="land"></label>\n<label>{l[3]} <textarea name="vraag"></textarea></label>\n'
+            f'<label>{l[4]} <input name="taal"></label>\n<label>{l[5]} <input name="bot-field"></label>\n</form>\n')
+
 
 for lang, m in META.items():
     html = f"""<!doctype html>
@@ -264,7 +271,7 @@ for lang, m in META.items():
 <body>
 <div id="app">{prerender(lang)}</div>
 <noscript><p style="padding:24px;font-family:sans-serif">{m["noscript"]} <a href="mailto:info@valtora-alliance.com">info@valtora-alliance.com</a></p></noscript>
-{DETECT if lang == "nl" else ""}<script type="text/x-template" id="dc-template">
+{detect(lang)}<script type="text/x-template" id="dc-template">
 {tpl}
 </script>
 <script>{RUNTIME}</script>
