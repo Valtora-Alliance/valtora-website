@@ -348,7 +348,7 @@ a{color:#0B2545}a:hover{color:#123A67}
 <p style="margin: 0 0 6px; color: #D3DDE8"><span style="font-weight: 600; color: #FFFFFF">Marion Sterckx</span> · <a href="tel:+32474582685" style="color: #E4C25C">+32 474 58 26 85</a></p>
 <p style="margin: 0; color: #D3DDE8">E-mail: <a href="mailto:info@valtora-alliance.com" style="color: #FFFFFF; font-weight: 600">info@valtora-alliance.com</a></p>
 </div>
-<form name="contact" method="POST" action="/bedankt.html" data-netlify="true" netlify-honeypot="bot-field" aria-label="Contactformulier" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; color: #0B2545; border-radius: 6px; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<form name="contact" method="POST" action="/bedankt.html" aria-label="Contactformulier" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; color: #0B2545; border-radius: 6px; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
 <input type="hidden" name="form-name" value="contact"><input type="hidden" name="taal" value="nl"><p hidden><label>Laat leeg: <input name="bot-field"></label></p>
 <label for="naam" style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">Naam<input id="naam" name="naam" type="text" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B8C4D2; border-radius: 4px"></label>
 <label for="email" style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">E-mail<input id="email" name="email" type="email" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B8C4D2; border-radius: 4px"></label>
@@ -370,7 +370,12 @@ a{color:#0B2545}a:hover{color:#123A67}
 </div></div>
 <noscript><p style="padding:24px;font-family:sans-serif">Deze website werkt het best met JavaScript. Contact: <a href="mailto:info@valtora-alliance.com">info@valtora-alliance.com</a></p></noscript>
 <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
-<input name="naam"><input name="email"><input name="taal"><input name="land"><textarea name="vraag"></textarea><input name="bot-field">
+<label>Naam <input name="naam"></label>
+<label>E-mail <input name="email"></label>
+<label>Land <input name="land"></label>
+<label>Vraag <textarea name="vraag"></textarea></label>
+<label>Taal van de website <input name="taal"></label>
+<label>Laat leeg <input name="bot-field"></label>
 </form>
 <script type="text/x-template" id="dc-template">
 <div lang="{{ lang }}" style="font-family: 'Source Sans 3', 'Segoe UI', sans-serif; color: #0B2545; background: #F7F6F2; font-size: 17px; line-height: 1.6">
@@ -822,7 +827,7 @@ a{color:#0B2545}a:hover{color:#123A67}
 <p style="margin: 0 0 6px; color: #D3DDE8"><span style="font-weight: 600; color: #FFFFFF">Marion Sterckx</span> · <a href="tel:+32474582685" style="color: #E4C25C">{{ t.phoneMarion }}</a></p>
 <p style="margin: 0; color: #D3DDE8">{{ t.emailLine }} <a href="mailto:info@valtora-alliance.com" style="color: #FFFFFF; font-weight: 600">info@valtora-alliance.com</a></p>
 </div>
-<form name="contact" method="POST" action="{{ t.formAction }}" data-netlify="true" netlify-honeypot="bot-field" aria-label="{{ t.formLabel }}" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; color: #0B2545; border-radius: 6px; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+<form name="contact" method="POST" action="{{ t.formAction }}" aria-label="{{ t.formLabel }}" style="flex: 1 1 420px; min-width: 0; background: #FFFFFF; color: #0B2545; border-radius: 6px; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
 <input type="hidden" name="form-name" value="contact"><input type="hidden" name="taal" value="{{ lang }}"><p hidden><label>Laat leeg: <input name="bot-field"></label></p>
 <label for="naam" style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ t.fName }}<input id="naam" name="naam" type="text" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B8C4D2; border-radius: 4px"></label>
 <label for="email" style="display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px">{{ t.fEmail }}<input id="email" name="email" type="email" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B8C4D2; border-radius: 4px"></label>

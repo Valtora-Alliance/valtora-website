@@ -55,7 +55,7 @@ logic = logic.replace(_pick, "pick: () => window.__dcLang(code)")
 assert '<form aria-label="{{ t.formLabel }}" style="' in tpl
 tpl = tpl.replace(
     '<form aria-label="{{ t.formLabel }}" style="',
-    '<form name="contact" method="POST" action="{{ t.formAction }}" data-netlify="true" netlify-honeypot="bot-field" '
+    '<form name="contact" method="POST" action="{{ t.formAction }}" '
     'aria-label="{{ t.formLabel }}" style="', 1)
 assert 'gap: 16px">\n<label for="naam"' in tpl
 tpl = tpl.replace(
@@ -227,6 +227,18 @@ hreflang = "\n".join(
     f'<link rel="alternate" hreflang="{l}" href="{SITE}{m["path"]}">' for l, m in META.items()
 ) + f'\n<link rel="alternate" hreflang="x-default" href="{SITE}/">'
 
+# Eén verborgen formulier (alleen op de NL-pagina) registreert het formulier bij Netlify,
+# met vaste Nederlandse veldnamen voor de meldingsmail, in welke taal de bezoeker ook invult.
+DETECT = """<form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+<label>Naam <input name="naam"></label>
+<label>E-mail <input name="email"></label>
+<label>Land <input name="land"></label>
+<label>Vraag <textarea name="vraag"></textarea></label>
+<label>Taal van de website <input name="taal"></label>
+<label>Laat leeg <input name="bot-field"></label>
+</form>
+"""
+
 for lang, m in META.items():
     html = f"""<!doctype html>
 <html lang="{lang}">
@@ -252,10 +264,7 @@ for lang, m in META.items():
 <body>
 <div id="app">{prerender(lang)}</div>
 <noscript><p style="padding:24px;font-family:sans-serif">{m["noscript"]} <a href="mailto:info@valtora-alliance.com">info@valtora-alliance.com</a></p></noscript>
-<form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
-<input name="naam"><input name="email"><input name="taal"><input name="land"><textarea name="vraag"></textarea><input name="bot-field">
-</form>
-<script type="text/x-template" id="dc-template">
+{DETECT if lang == "nl" else ""}<script type="text/x-template" id="dc-template">
 {tpl}
 </script>
 <script>{RUNTIME}</script>
