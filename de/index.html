@@ -144,6 +144,7 @@ a{color:#0B2545}a:hover{color:#123A67}
 <section aria-labelledby="waarom-titel" style="max-width: 1200px; margin: 0 auto; padding: 96px 24px">
 <p style="margin: 0 0 12px; font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; color: #9A7A14; font-weight: 600">Warum Paraguay</p>
 <h2 id="waarom-titel" style="margin: 0 0 48px; font-family: 'EB Garamond', Georgia, serif; font-weight: 500; font-size: 42px; line-height: 1.15; max-width: 760px">Eine wachsende Wirtschaft im Herzen Südamerikas.</h2>
+
 <div style="display: flex; flex-wrap: wrap; gap: 24px">
 <button type="button" data-dc-click="10" aria-expanded="false" aria-controls="cijfers" style="flex: 1 1 240px; background: #FFFFFF; border: 0; border-top: 3px solid #C9A227; padding: 28px; box-sizing: border-box; text-align: left; font: inherit; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 10px">
 <span style="font-size: 19px; font-weight: 600">Wachstumsmarkt</span>
@@ -166,6 +167,9 @@ a{color:#0B2545}a:hover{color:#123A67}
 <span style="margin-top: auto; font-size: 15px; font-weight: 600; color: #0B2545; text-decoration: underline; text-underline-offset: 3px">Wie funktioniert der Investor Pass?</span>
 </button>
 </div>
+
+
+
 
 
 
@@ -433,7 +437,7 @@ a{color:#0B2545}a:hover{color:#123A67}
 </div>
 </sc-if>
 <sc-if value="{{ spAny }}" hint-placeholder-val="false">
-<div id="spreiden-detail">
+<div id="spreiden-detail" style="scroll-margin-top: 96px">
 <div role="group" aria-label="{{ t.spEyebrow }}" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px">
 <sc-for list="{{ spTiles }}" as="c" hint-placeholder-count="7">
 <button type="button" onClick="{{ c.pick }}" aria-pressed="{{ c.attr }}" style="font: inherit; font-size: 14px; font-weight: 600; padding: 8px 14px; min-height: 40px; border-radius: 999px; cursor: pointer; border: 1px solid {{ c.chipLine }}; background: {{ c.chipBg }}; color: {{ c.chipFg }}">{{ c.chip }}</button>
@@ -485,6 +489,7 @@ a{color:#0B2545}a:hover{color:#123A67}
 <section aria-labelledby="waarom-titel" style="max-width: 1200px; margin: 0 auto; padding: 96px 24px">
 <p style="margin: 0 0 12px; font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; color: #9A7A14; font-weight: 600">{{ t.whyEyebrow }}</p>
 <h2 id="waarom-titel" style="margin: 0 0 48px; font-family: 'EB Garamond', Georgia, serif; font-weight: 500; font-size: 42px; line-height: 1.15; max-width: 760px">{{ t.whyTitle }}</h2>
+<sc-if value="{{ whyNone }}" hint-placeholder-val="true">
 <div style="display: flex; flex-wrap: wrap; gap: 24px">
 <button type="button" onClick="{{ toggleStats }}" aria-expanded="{{ statsOpenAttr }}" aria-controls="cijfers" style="flex: 1 1 240px; background: {{ statsCardBg }}; border: 0; border-top: 3px solid #C9A227; padding: 28px; box-sizing: border-box; text-align: left; font: inherit; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 10px">
 <span style="font-size: 19px; font-weight: 600">{{ t.why1Title }}</span>
@@ -507,6 +512,14 @@ a{color:#0B2545}a:hover{color:#123A67}
 <span style="margin-top: auto; font-size: 15px; font-weight: 600; color: #0B2545; text-decoration: underline; text-underline-offset: 3px">{{ homeLabel }}</span>
 </button>
 </div>
+</sc-if>
+<sc-if value="{{ whyAny }}" hint-placeholder-val="false">
+<div id="waarom-keuze" role="group" aria-label="{{ t.whyEyebrow }}" style="display: flex; flex-wrap: wrap; gap: 8px; scroll-margin-top: 96px">
+<sc-for list="{{ whyChips }}" as="c" hint-placeholder-count="4">
+<button type="button" onClick="{{ c.pick }}" aria-pressed="{{ c.attr }}" style="font: inherit; font-size: 14px; font-weight: 600; padding: 8px 14px; min-height: 40px; border-radius: 999px; cursor: pointer; border: 1px solid {{ c.line }}; background: {{ c.bg }}; color: {{ c.fg }}">{{ c.label }}</button>
+</sc-for>
+</div>
+</sc-if>
 <sc-if value="{{ statsOpen }}" hint-placeholder-val="{{ false }}">
 <div id="cijfers" style="margin-top: 24px; background: #FFFFFF; border: 1px solid #E3E1DA; border-radius: 6px; padding: 32px; box-sizing: border-box">
 <h3 style="margin: 0 0 4px; font-family: 'EB Garamond', Georgia, serif; font-weight: 500; font-size: 28px">{{ t.statsTitle }}</h3>
@@ -732,6 +745,9 @@ a{color:#0B2545}a:hover{color:#123A67}
 <p style="margin: 28px 0 0; font-size: 15px; color: #4A5C70">{{ t.ipNote }}</p>
 <p style="margin: 16px 0 0; font-size: 13px; color: #5B7290">{{ t.srcLabel }} <a href="https://www.lanacion.com.py/negocios/2026/08/09/con-el-investor-pass-paraguay-busca-atraer-capital-extranjero-con-inversiones-desde-usd-70000/">La Nación, 09/08/2026 ({{ t.micRes }})</a> · <a href="https://www.abc.com.py/economia/2026/05/21/investor-pass-residencia-permanente-en-paraguay-para-inversores-extranjeros/">ABC Color, 21/05/2026</a> · <a href="https://migraciones.gov.py/paraguay-investor-pass-nueva-herramienta-para-facilitar-la-inversion-extranjera-en-el-pais/">Dirección General de Migraciones</a> · <a href="https://www.ultimahora.com/paraguay-ofrece-5-ventajas-impositivas-a-inversionistas">Última Hora (MEF/DNIT), 24/04/2026</a> · <a href="https://taxsummaries.pwc.com/paraguay/individual/taxes-on-personal-income">PwC Tax Summaries</a> · <a href="https://www.globalpropertyguide.com/Latin-America/Paraguay/Inheritance">Global Property Guide</a></p>
 </div>
+</sc-if>
+<sc-if value="{{ whyAny }}" hint-placeholder-val="false">
+<button type="button" onClick="{{ whyClose }}" style="margin-top: 24px; font: inherit; font-weight: 600; font-size: 16px; background: #0B2545; color: #FFFFFF; border: 0; border-radius: 4px; padding: 12px 22px; min-height: 44px; cursor: pointer">{{ t.spLess }}</button>
 </sc-if>
 </section>
 
@@ -1380,7 +1396,14 @@ class Component extends DCLogic {
     const merOpen = panel === 'mer';
     const reOpen = panel === 're';
     const homeOpen = panel === 'home';
-    const toggle = (name) => () => this.setState({ panel: this.state.panel === name ? null : name });
+    // Na een klik: de keuzeknoppen bovenaan in beeld brengen als ze buiten het scherm vallen (vooral op gsm).
+    const reveal = (id) => setTimeout(() => { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top < 0) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 30);
+    const toggle = (name) => () => { this.setState({ panel: this.state.panel === name ? null : name }); reveal('waarom-keuze'); };
+    const whyAny = panel === 'stats' || panel === 'mer' || panel === 're' || panel === 'home';
+    const whyChips = [['stats', t.why1Title], ['mer', t.merTitle], ['re', t.reCardTitle], ['home', t.ipCardTitle]].map(([k, label]) => {
+      const on = panel === k;
+      return { label, attr: on ? 'true' : 'false', bg: on ? '#0B2545' : '#FFFFFF', fg: on ? '#FFFFFF' : '#0B2545', line: on ? '#0B2545' : '#B8C4D2', pick: () => { this.setState({ panel: k }); reveal('waarom-keuze'); } };
+    });
     const ipStyle = [
       { bg: '#F1EFE8', fg: '#0B2545', kc: '#5B7290', tc: '#4A5C70' },
       { bg: '#F1EFE8', fg: '#0B2545', kc: '#5B7290', tc: '#4A5C70' },
@@ -1442,8 +1465,8 @@ class Component extends DCLogic {
         linkc: dark ? '#FFFFFF' : '#0B2545',
         attr: on ? 'true' : 'false',
         label: on ? t.spHide : t.spShow,
-        toggle: () => this.setState({ spPanel: this.state.spPanel === i ? null : i }),
-        pick: () => this.setState({ spPanel: i }),
+        toggle: () => { this.setState({ spPanel: this.state.spPanel === i ? null : i }); reveal('spreiden-detail'); },
+        pick: () => { this.setState({ spPanel: i }); reveal('spreiden-detail'); },
         chip: c.tag === 'Europa' || c.tag === 'Europe' ? c.tag + ': ' + (lang === 'nl' ? c.title.charAt(0).toLowerCase() + c.title.slice(1) : c.title) : c.tag,
         chipBg: on ? '#0B2545' : '#FFFFFF',
         chipFg: on ? '#FFFFFF' : '#0B2545',
@@ -1464,6 +1487,7 @@ class Component extends DCLogic {
     }));
     return {
       lang, t, langs, spTiles, spDetailOpen, psOpen, spCur, spSrcLabel: t.srcLabel, spAny, spNone: !spAny, spClose: () => this.setState({ spPanel: null }),
+      whyAny, whyNone: !whyAny, whyChips, whyClose: () => { this.setState({ panel: null }); setTimeout(() => { const el = document.getElementById('waarom-titel'); if (el && el.getBoundingClientRect().top < 0) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 30); },
       statsOpen: open,
       statsOpenAttr: open ? 'true' : 'false',
       statsLabel: open ? t.hideStats : t.showStats,
