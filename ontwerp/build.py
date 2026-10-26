@@ -254,6 +254,7 @@ for lang, m in META.items():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{m["title"]}</title>
 <meta name="description" content="{m["desc"]}">
+<meta name="google-site-verification" content="RVH2YFo_LV_PZ-emKlEPSpBJ7jKwr_ZCcS6HXIPwRhE">
 <link rel="canonical" href="{SITE}{m["path"]}">
 {hreflang}
 <link rel="icon" type="image/png" href="/img/favicon.png">
